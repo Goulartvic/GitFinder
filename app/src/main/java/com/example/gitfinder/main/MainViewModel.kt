@@ -26,4 +26,17 @@ class MainViewModel : BaseViewModel() {
                 error.postValue(true)
             })
     }
+
+    fun searchRepositories(repoName: String) {
+        apiInstance.searchRepositories(repoName)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                it?.let {
+                    repositories.postValue(it.items)
+                }
+            }, {
+                error.postValue(true)
+            })
+    }
 }
