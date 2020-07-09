@@ -6,8 +6,9 @@ import java.io.Serializable
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class Repositories(
-    val result: List<Repository>
+    @JsonProperty(value = "items") val items: List<Repository>
 )
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class Repository(
     @JsonProperty(value = "name") val name: String,

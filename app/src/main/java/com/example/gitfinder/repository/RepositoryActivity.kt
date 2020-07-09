@@ -7,6 +7,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.gitfinder.R
 import com.example.gitfinder.models.Repository
+import com.example.gitfinder.utils.Constants.Companion.REPOSITORY
 import kotlinx.android.synthetic.main.activity_details.*
 import kotlinx.android.synthetic.main.item_repo_detail.*
 
@@ -16,7 +17,7 @@ class RepositoryActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_details)
 
-        val repository: Repository = intent.extras?.get("REPO") as Repository
+        val repository: Repository = intent.extras?.get(REPOSITORY) as Repository
 
         supportActionBar?.let {
             it.setDisplayHomeAsUpEnabled(true)
