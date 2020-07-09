@@ -1,5 +1,6 @@
 package com.example.gitfinder.main
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -8,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gitfinder.R
+import com.example.gitfinder.repository.RepositoryActivity
 import com.example.gitfinder.utils.showText
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -39,8 +41,12 @@ class MainActivity : AppCompatActivity() {
             it?.let {
                 adapter.data = it
             }
+
+            adapter.setOnItemClickListener {
+                startActivity(Intent(this, RepositoryActivity::class.java)
+                    .putExtra("REPO", it))
+            }
         })
-        
         viewModel.error.observe(this, Observer {
             showText(this, "Error to load repositories")
         })
