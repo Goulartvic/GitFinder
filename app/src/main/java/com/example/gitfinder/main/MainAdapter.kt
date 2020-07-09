@@ -11,6 +11,13 @@ import kotlinx.android.synthetic.main.item_repo.view.*
 class MainAdapter  : RecyclerView.Adapter<MainAdapter.ViewHolder>() {
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
+        init {
+            itemView.setOnClickListener {
+                onItemListener(data[adapterPosition])
+            }
+        }
+
         fun bind(repository: Repository) {
             itemView.owner_name.text = repository.owner.login
             itemView.repo_name.text = repository.name
@@ -25,6 +32,12 @@ class MainAdapter  : RecyclerView.Adapter<MainAdapter.ViewHolder>() {
     override fun getItemCount(): Int = data.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.bind(data[position])
+
+    private var onItemListener: (item: Repository) -> Unit = {}
+
+    fun setOnItemClickListener(listener:(item: Repository) -> Unit) {
+        onItemListener = listener
+    }
 
     var data: List<Repository> = emptyList()
         set(value) {
